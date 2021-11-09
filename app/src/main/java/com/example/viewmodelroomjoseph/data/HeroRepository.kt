@@ -8,7 +8,8 @@ data class HeroRepository(private val heroDao: HeroDao){
     suspend fun getHeroById(id: Int) = heroDao.getHeroesById(id)
     suspend fun getComics() = heroDao.getComics()
     suspend fun getSeries() = heroDao.getSeries()
-    suspend fun insertHero(hero: HeroEntity) = heroDao.insert(hero)
-    suspend fun updateHero(hero: HeroEntity) = heroDao.updateHero(hero)
-    suspend fun deleteHero(hero: HeroEntity) = heroDao.deleteHero(hero)
+    suspend fun insertHero(hero: HeroEntity) = heroDao.insertHero(hero)
+    fun updateHero(hero: HeroEntity) = heroDao.updateHero(hero)
+    fun deleteHero(hero: HeroEntity) = heroDao.deleteHero(hero)
+    suspend fun insertHeroWithElements(hero: HeroWithElements) = heroDao.insertHeroWithElements(hero)
 }

@@ -1,5 +1,6 @@
 package com.example.viewmodelroomjoseph.domain
 
+
 import java.time.LocalDate
 data class Hero(
     val id: Int,

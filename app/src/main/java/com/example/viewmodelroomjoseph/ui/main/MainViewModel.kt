@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel (private val getHeroes: GetHeroes,
                      private val insertHero: InsertHero,
+                     private val insertHeroWithElements: InsertHeroWithElements,
                      private val updateHero: UpdateHero,
                      private val deleteHero: DeleteHero): ViewModel(){
 
@@ -25,17 +26,23 @@ class MainViewModel (private val getHeroes: GetHeroes,
             insertHero.invoke(hero)
         }
     }
+    fun insertHeroWithElements(hero: Hero){
+        viewModelScope.launch {
+            insertHeroWithElements.invoke(hero)
+        }
+    }
 }
 
 class MainViewModelFactory(private val getHeroes: GetHeroes,
                            private val insertHero: InsertHero,
+                           private val insertHeroWithElements: InsertHeroWithElements,
                            private val updateHero: UpdateHero,
                            private val deleteHero: DeleteHero,)
     : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(getHeroes,insertHero,updateHero,deleteHero) as T
+            return MainViewModel(getHeroes,insertHero,insertHeroWithElements,updateHero,deleteHero) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

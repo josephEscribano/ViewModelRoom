@@ -4,30 +4,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvHeroes"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
+    tools:context=".ui.main.MainActivity"
+    >
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfName"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/Name"
+        android:text="@string/Name"
+        android:textColorHint="@color/purple_200"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        app:boxStrokeColor="@color/purple_200"
+        app:startIconTint="@color/purple_200"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        >
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:textStyle="bold"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/tfDescription"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:hint="@string/description"
+        android:text="@string/description"
+        android:textColorHint="@color/purple_200"
+        app:boxStrokeColor="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+
+        app:startIconTint="@color/purple_200">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:textStyle="bold"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/dateButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="@string/Calendar"
+        android:backgroundTint="@color/purple_700"
+        app:icon="@drawable/ic_baseline_calendar_today_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tfDescription"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="bold"
+        android:text="@string/date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dateButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tfDescription"
+        app:layout_constraintVertical_bias="0.13"
+        />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:backgroundTint="@color/purple_700"
+        android:text="@string/add"
+        android:textColor="@color/white"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateButton"
+        app:layout_constraintVertical_bias="0.5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

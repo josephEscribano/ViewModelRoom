@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class HeroWithElements(
-    @Embedded val hero: HeroEntity,
+    @Embedded var hero: HeroEntity,
     @Relation(
         parentColumn = "heroId",
         entityColumn = "heroCreatorId"

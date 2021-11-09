@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ViewModelRoomJoseph</string>
+    <string name="Name">Name</string>
+    <string name="description">description</string>
+    <string name="Calendar">Calendar</string>
+    <string name="date">Date</string>
+    <string name="add">add</string>
+    <string name="barra">/</string>
+    <string name="datepicker">datepicker</string>
+    <string name="show">show</string>
+    <string name="del">delete</string>
+    <string name="id">ID</string>
+    <string name="heroe">heroe</string>
 </resources>

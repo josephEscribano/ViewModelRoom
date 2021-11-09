@@ -11,7 +11,7 @@ import com.example.viewmodelroomjoseph.data.modelo.HeroEntity
 import com.example.viewmodelroomjoseph.data.modelo.SerieEntity
 import com.example.viewmodelroomjoseph.domain.Hero
 
-@Database(entities = [HeroEntity::class,ElementsEntity::class,ComicEntity::class,SerieEntity::class],version = 8,exportSchema = true)
+@Database(entities = [HeroEntity::class,ElementsEntity::class,ComicEntity::class,SerieEntity::class],version = 11,exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class HeroRoomDatabase: RoomDatabase(){
     abstract fun heroDao() : HeroDao
@@ -27,7 +27,6 @@ abstract class HeroRoomDatabase: RoomDatabase(){
                     HeroRoomDatabase::class.java,
                     "item_database"
                 )
-                    .fallbackToDestructiveMigrationFrom()
                     .build()
 
                 INSTANCE = instace

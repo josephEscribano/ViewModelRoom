@@ -8,7 +8,7 @@ import java.time.LocalDate
 @Entity(tableName = "heroes")
 data class HeroEntity(
     @PrimaryKey(autoGenerate = true)
-    val heroId: Int,
+    var heroId: Int,
     @ColumnInfo(name = "description")
     val description: String,
     @ColumnInfo(name = "date")

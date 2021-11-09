@@ -19,8 +19,19 @@ interface HeroDao {
     suspend fun getSeries(): List<SerieEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(hero: HeroEntity)
+    suspend fun insertHero(hero: HeroEntity) :Long
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertListElements(elements: List<ElementsEntity>)
 
+    @Transaction
+    suspend fun insertHeroWithElements(heroWithElements: HeroWithElements){
+        heroWithElements.hero.heroId = insertHero(heroWithElements.hero).toInt()
+        heroWithElements.elements?.apply {
+            forEach { it.heroCreatorId = heroWithElements.hero.heroId }
+            insertListElements(this)
+        }
+
+    }
     @Update
     fun updateHero(heroe: HeroEntity)
 
