@@ -27,6 +27,7 @@ abstract class HeroRoomDatabase: RoomDatabase(){
                     HeroRoomDatabase::class.java,
                     "item_database"
                 )
+                    .fallbackToDestructiveMigration()
                     .build()
 
                 INSTANCE = instace

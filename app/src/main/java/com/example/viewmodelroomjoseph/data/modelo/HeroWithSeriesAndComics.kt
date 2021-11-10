@@ -1,13 +1,16 @@
 package com.example.viewmodelroomjoseph.data.modelo
 
 import androidx.room.Embedded
+import androidx.room.Entity
 import androidx.room.Relation
 
-data class HeroWithSeries(
-    @Embedded val hero: HeroEntity,
+data class HeroWithSeriesAndComics(
+    @Embedded val heroWithComics: HeroWithComics?,
     @Relation(
+        entity = SerieEntity::class,
         parentColumn = "heroId",
-        entityColumn = "heroSereieId"
+        entityColumn = "heroSerieId"
+
     )
     val series: List<SerieEntity>?
 )

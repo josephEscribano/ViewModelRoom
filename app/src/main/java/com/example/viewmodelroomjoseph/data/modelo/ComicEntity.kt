@@ -8,14 +8,14 @@ import com.example.viewmodelroomjoseph.data.modelo.HeroEntity
 
 @Entity(tableName = "comics",
 foreignKeys = [
-    ForeignKey(entity = ElementsEntity::class,
-    parentColumns = ["elementId"],
-    childColumns = ["elementComicId"])
+    ForeignKey(entity = HeroEntity::class,
+    parentColumns = ["heroId"],
+    childColumns = ["heroComicId"])
 ])
 data class ComicEntity(
     @ColumnInfo(name = "comicName")
     val comicName: String,
-    var elementComicId: Int= 0,
+    var heroComicId: Int= 0,
     @PrimaryKey(autoGenerate = true)
     val comicId: Int = 0,
 )
