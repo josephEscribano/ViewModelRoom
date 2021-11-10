@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.RecyclerActivity" />
+        <activity android:name=".ui.main.DataScreen" />
     </application>
 
 </manifest>

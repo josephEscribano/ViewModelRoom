@@ -7,10 +7,10 @@ import com.example.viewmodelroomjoseph.data.modelo.*
 interface HeroDao {
     @Transaction
     @Query("select * from heroes")
-    suspend fun getHeroes(): List<HeroWithElements>
+    suspend fun getHeroes(): List<HeroWithSeriesAndComics>
     @Transaction
     @Query("select * from heroes where heroId = :id")
-    suspend fun getHeroesById(id: Int) : HeroWithElements
+    suspend fun getHeroesById(id: Int) : HeroWithSeriesAndComics
 
     @Query("select * from comics")
     suspend fun getComics(): List<ComicEntity>
@@ -21,14 +21,20 @@ interface HeroDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertHero(hero: HeroEntity) :Long
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertListElements(elements: List<ElementsEntity>)
+    suspend fun insertListComics(elements: List<ComicEntity>)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertListSeries(elements: List<SerieEntity>)
 
     @Transaction
-    suspend fun insertHeroWithElements(heroWithElements: HeroWithElements){
-        heroWithElements.hero.heroId = insertHero(heroWithElements.hero).toInt()
-        heroWithElements.elements?.apply {
-            forEach { it.heroCreatorId = heroWithElements.hero.heroId }
-            insertListElements(this)
+    suspend fun insertHeroWithElements(heroWithSeriesAndComics: HeroWithSeriesAndComics){
+        heroWithSeriesAndComics.heroWithComics.hero.heroId = insertHero(heroWithSeriesAndComics.heroWithComics.hero).toInt()
+        heroWithSeriesAndComics.heroWithComics.comics?.apply {
+            forEach { it.heroComicId = heroWithSeriesAndComics.heroWithComics.hero.heroId }
+            insertListComics(this)
+        }
+        heroWithSeriesAndComics.series?.apply {
+            forEach { it.heroSerieId = heroWithSeriesAndComics.heroWithComics.hero.heroId }
+            insertListSeries(this)
         }
 
     }

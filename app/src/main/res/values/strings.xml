@@ -11,4 +11,14 @@
     <string name="del">delete</string>
     <string name="id">ID</string>
     <string name="heroe">heroe</string>
+    <string name="list">Heroes</string>
+    <string name="Comics">Comics</string>
+    <string name="Series">Series</string>
+    <string name="itemDatabase">item_database</string>
+    <string name="ConfirmarSerie">Serie añadida</string>
+    <string name="ConfirmarComic">Comic añadido</string>
+    <string name="ConfirmarHeroe">Heroe añadido</string>
+    <string name="comics">comics</string>
+    <string name="series">series</string>
+    <string name="Update">Update</string>
 </resources>

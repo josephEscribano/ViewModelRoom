@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity"
+    tools:context=".ui.main.DataScreen"
     >
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tfName"
@@ -15,6 +15,7 @@
         android:textColorHint="@color/purple_200"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
+        android:layout_marginTop="30dp"
         app:boxStrokeColor="@color/purple_200"
         app:startIconTint="@color/purple_200"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +23,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_bias="0"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
         >
@@ -56,7 +57,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintVertical_bias="0.2"
 
         app:startIconTint="@color/purple_200">
 
@@ -78,43 +79,44 @@
         android:layout_height="50dp"
         android:text="@string/Calendar"
         android:backgroundTint="@color/purple_700"
+        android:layout_marginTop="20dp"
         app:icon="@drawable/ic_baseline_calendar_today_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.76"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tfDescription"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0" />
 
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:textStyle="bold"
         android:text="@string/date"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dateButton"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tfDescription"
-        app:layout_constraintVertical_bias="0.13"
-        />
+        app:layout_constraintVertical_bias="0.085" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/updateButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginStart="5dp"
         android:backgroundTint="@color/purple_700"
-        android:text="@string/add"
+        android:text="@string/Update"
         android:textColor="@color/white"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.215"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="0.955" />
 
     <Button
         android:id="@+id/listButton"
@@ -127,109 +129,73 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.905"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="0.955" />
 
-    <Button
-        android:id="@+id/addComicsButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:backgroundTint="@color/purple_700"
-        android:text="@string/Comics"
-        android:textColor="@color/white"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:layout_constraintVertical_bias="0.2" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfSeries"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/comicsLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/Series"
-        android:text="@string/Name"
-        android:textColorHint="@color/purple_200"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="150dp"
-        app:boxStrokeColor="@color/purple_200"
-        app:startIconTint="@color/purple_200"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/comics"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.73"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintVertical_bias="0.95" />
 
-        >
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etSeries"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:textStyle="bold"
-
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <Button
-        android:id="@+id/addSeriesButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:backgroundTint="@color/purple_700"
-        android:text="@string/Series"
-        android:textColor="@color/white"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfComics"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/Comics"
-        android:text="@string/Name"
-        android:textColorHint="@color/purple_200"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="150dp"
-        app:boxStrokeColor="@color/purple_200"
-        app:startIconTint="@color/purple_200"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.57"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.517">
 
-        >
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etComics"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvComics"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:textStyle="bold"
+            android:layout_height="wrap_content" />
+    </ScrollView>
 
-            />
+    <TextView
+        android:id="@+id/seriesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/series"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.003"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="1.0" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="0.44">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSeries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

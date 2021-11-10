@@ -3,36 +3,34 @@ package com.example.viewmodelroomjoseph.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.sax.Element
 import androidx.activity.viewModels
 import com.example.viewmodelroomjoseph.R
 import com.example.viewmodelroomjoseph.data.HeroRepository
 import com.example.viewmodelroomjoseph.data.HeroRoomDatabase
 import com.example.viewmodelroomjoseph.databinding.ActivityMainBinding
-import com.example.viewmodelroomjoseph.databinding.RecyclerActivityBinding
 import com.example.viewmodelroomjoseph.domain.Comic
-import com.example.viewmodelroomjoseph.domain.Elements
 import com.example.viewmodelroomjoseph.domain.Hero
 import com.example.viewmodelroomjoseph.domain.Serie
 import com.example.viewmodelroomjoseph.usecases.*
+import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var formatter: DateTimeFormatter
-    private lateinit var heroAdapter: HeroAdapter
     private lateinit var name:String
     private lateinit var description: String
     private lateinit var date: LocalDate
     private lateinit var hero :Hero
-    private lateinit var element : List<Elements>
+    private lateinit var comics : MutableList<Comic>
+    private lateinit var series : MutableList<Serie>
 
     private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory(
             GetHeroes(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
-            InsertHero(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
-            InsertHeroWithElements(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
+            GetHeroById(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
+            InsertHeroWithSeriesAndComics(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
             UpdateHero(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
             DeleteHero(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
         )
@@ -45,19 +43,40 @@ class MainActivity : AppCompatActivity() {
         binding.dateButton.setOnClickListener {
             showDatePickerDialog()
         }
+
+        binding.addComicsButton.setOnClickListener {
+            comics = arrayListOf()
+            comics.add(Comic(binding.etComics.text.toString(),0))
+            Snackbar.make(binding.root,resources.getString(R.string.ConfirmarComic),Snackbar.LENGTH_SHORT).show()
+            binding.etComics.setText("")
+        }
+
+        binding.addSeriesButton.setOnClickListener {
+            series = arrayListOf()
+            series.add(Serie(binding.etSeries.text.toString(),0))
+            Snackbar.make(binding.root,resources.getString(R.string.ConfirmarSerie),Snackbar.LENGTH_SHORT).show()
+            binding.etSeries.setText("")
+        }
+
         binding.addButton.setOnClickListener {
             with(binding){
                 description = etDescription.text.toString()
                 name = etName.text.toString()
-
             }
-            element = listOf(Elements(0,Comic("comic1",0), Serie("serie1",0)))
-            hero = Hero(0,description, date,name,element)
+
+            hero = Hero(0,description, date,name,series,comics)
             viewModel.insertHeroWithElements(hero)
+            Snackbar.make(binding.root,resources.getString(R.string.ConfirmarHeroe),Snackbar.LENGTH_SHORT).show()
+            comics.clear()
+            series.clear()
             viewModel.getHeroes()
+
+
+        }
+
+        binding.listButton.setOnClickListener {
             val intent = Intent(this,RecyclerActivity::class.java)
             startActivity(intent)
-
         }
 
 
