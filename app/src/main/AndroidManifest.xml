@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.RecyclerActivity" />
-        <activity android:name=".ui.main.DataScreen" />
+        <activity android:name=".ui.main.DataScreen" android:windowSoftInputMode="adjustNothing" />
     </application>
 
 </manifest>

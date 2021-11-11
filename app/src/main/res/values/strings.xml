@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">ViewModelRoomJoseph</string>
-    <string name="Name">Name</string>
+    <string name="name">Name</string>
     <string name="description">description</string>
-    <string name="Calendar">Calendar</string>
+    <string name="calendar">Calendar</string>
     <string name="date">Date</string>
     <string name="add">add</string>
     <string name="barra">/</string>
@@ -12,13 +12,16 @@
     <string name="id">ID</string>
     <string name="heroe">heroe</string>
     <string name="list">Heroes</string>
-    <string name="Comics">Comics</string>
-    <string name="Series">Series</string>
     <string name="itemDatabase">item_database</string>
-    <string name="ConfirmarSerie">Serie añadida</string>
-    <string name="ConfirmarComic">Comic añadido</string>
-    <string name="ConfirmarHeroe">Heroe añadido</string>
-    <string name="comics">comics</string>
-    <string name="series">series</string>
+    <string name="confirmarSerie">Serie añadida</string>
+    <string name="confirmarComic">Comic añadido</string>
+    <string name="confirmarHeroe">Heroe añadido</string>
+    <string name="comics">Comics</string>
+    <string name="series">Series</string>
     <string name="Update">Update</string>
+    <string name="aviso">Tienes que rellenar el nombre, la descripcion y la fecha</string>
+    <string name="elements">Elements</string>
+    <string name="dateField">Date</string>
+    <string name="formato">dd/MM/yyyy</string>
+    <string name="actualizado">Heroe actualizado</string>
 </resources>

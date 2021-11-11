@@ -10,8 +10,8 @@
         android:id="@+id/tfName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/Name"
-        android:text="@string/Name"
+        android:hint="@string/name"
+        android:text="@string/name"
         android:textColorHint="@color/purple_200"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
@@ -77,7 +77,7 @@
         android:id="@+id/dateButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:text="@string/Calendar"
+        android:text="@string/calendar"
         android:backgroundTint="@color/purple_700"
         android:layout_marginTop="20dp"
         app:icon="@drawable/ic_baseline_calendar_today_24"
@@ -113,26 +113,10 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:layout_constraintVertical_bias="0.955" />
-
-    <Button
-        android:id="@+id/listButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:backgroundTint="@color/purple_700"
-        android:text="@string/list"
-        android:textColor="@color/white"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.905"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:layout_constraintVertical_bias="0.955" />
+        app:layout_constraintVertical_bias="0.961" />
 
     <TextView
         android:id="@+id/comicsLabel"
@@ -161,6 +145,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvComics"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
@@ -193,9 +178,25 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSeries"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
+
+    <Button
+        android:id="@+id/listButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/purple_700"
+        android:text="@string/list"
+        android:textColor="@color/white"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toEndOf="@+id/updateButton"
+        app:layout_constraintTop_toBottomOf="@+id/dateButton"
+        app:layout_constraintVertical_bias="0.961" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

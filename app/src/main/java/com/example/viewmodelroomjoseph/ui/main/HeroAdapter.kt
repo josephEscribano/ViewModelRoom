@@ -11,7 +11,8 @@ import com.example.viewmodelroomjoseph.databinding.ViewHeroBinding
 import com.example.viewmodelroomjoseph.domain.Hero
 import java.time.format.DateTimeFormatter
 
-data class HeroAdapter(private val viewModel: MainViewModel,
+data class HeroAdapter(private val getHeroes: () -> Unit,
+                       private val deleteHero: (Hero) -> Unit,
                        private val showData: (Hero) -> Unit
                        ): ListAdapter<Hero,HeroAdapter.ItemViewHolder>(DiffCallback()) {
 
@@ -21,8 +22,8 @@ data class HeroAdapter(private val viewModel: MainViewModel,
     }
 
     override fun onBindViewHolder(holder:ItemViewHolder, position: Int) = with(holder){
-        val item  = getItem(position)
-        bind(item,viewModel,showData)
+        val hero  = getItem(position)
+        bind(hero,getHeroes,deleteHero,showData)
     }
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,19 +31,18 @@ data class HeroAdapter(private val viewModel: MainViewModel,
         private val binding = ViewHeroBinding.bind(itemView)
 
         private lateinit var formatter: DateTimeFormatter
-        fun bind(hero: Hero, viewModel: MainViewModel, showData: (Hero) -> Unit) = with(binding){
+        fun bind(hero: Hero, getHeroes: () -> Unit, deleteHero: (Hero) -> Unit, showData: (Hero) -> Unit) = with(binding){
             id.text = hero.id.toString()
             name.text = hero.name
-            formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            formatter = DateTimeFormatter.ofPattern(binding.root.resources.getString(R.string.formato))
             date.text = formatter.format(hero.date).toString()
             buttonDelete.setOnClickListener {
-                viewModel.deleteHero(hero)
-                viewModel.getHeroes()
+                deleteHero(hero)
+                getHeroes()
             }
 
             buttonView.setOnClickListener {
-                val heroDB = viewModel.getHeroById(hero.id)
-                showData(heroDB)
+                showData(hero)
             }
 
         }

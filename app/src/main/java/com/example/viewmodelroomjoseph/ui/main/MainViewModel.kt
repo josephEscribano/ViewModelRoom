@@ -6,7 +6,6 @@ import com.example.viewmodelroomjoseph.usecases.*
 import kotlinx.coroutines.launch
 
 class MainViewModel (private val getHeroes: GetHeroes,
-                     private val getHeroById: GetHeroById,
                      private val insertHeroWithSeriesAndComics: InsertHeroWithSeriesAndComics,
                      private val updateHero: UpdateHero,
                      private val deleteHero: DeleteHero): ViewModel(){
@@ -14,17 +13,11 @@ class MainViewModel (private val getHeroes: GetHeroes,
     private val _heroes = MutableLiveData<List<Hero>>()
     val heroes: LiveData<List<Hero>> get() = _heroes
 
-    fun getHeroById(id:Int): Hero{
-        lateinit var hero: Hero
-        viewModelScope.launch {
-             hero = getHeroById.invoke(id)
-        }
 
-        return hero
-    }
     fun getHeroes(){
         viewModelScope.launch {
             _heroes.value = getHeroes.invoke()
+
         }
     }
     fun deleteHero(hero: Hero){
@@ -33,15 +26,20 @@ class MainViewModel (private val getHeroes: GetHeroes,
         }
 
     }
-    fun insertHeroWithElements(hero: Hero){
+    fun insertHeroWithSeruesAndComics(hero: Hero){
         viewModelScope.launch {
             insertHeroWithSeriesAndComics.invoke(hero)
+        }
+    }
+
+    fun updateHero(hero: Hero){
+        viewModelScope.launch {
+            updateHero.invoke(hero)
         }
     }
 }
 
 class MainViewModelFactory(private val getHeroes: GetHeroes,
-                           private val getHeroById: GetHeroById,
                            private val insertHeroWithSeriesAndComics: InsertHeroWithSeriesAndComics,
                            private val updateHero: UpdateHero,
                            private val deleteHero: DeleteHero,)
@@ -49,7 +47,7 @@ class MainViewModelFactory(private val getHeroes: GetHeroes,
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(getHeroes,getHeroById,insertHeroWithSeriesAndComics,updateHero,deleteHero) as T
+            return MainViewModel(getHeroes,insertHeroWithSeriesAndComics,updateHero,deleteHero) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

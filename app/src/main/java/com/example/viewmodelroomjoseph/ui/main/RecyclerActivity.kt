@@ -9,7 +9,6 @@ import com.example.viewmodelroomjoseph.R
 import com.example.viewmodelroomjoseph.data.HeroRepository
 import com.example.viewmodelroomjoseph.data.HeroRoomDatabase
 import com.example.viewmodelroomjoseph.databinding.RecyclerActivityBinding
-import com.example.viewmodelroomjoseph.databinding.ViewHeroBinding
 import com.example.viewmodelroomjoseph.domain.Hero
 import com.example.viewmodelroomjoseph.usecases.*
 
@@ -19,7 +18,6 @@ class RecyclerActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory(
             GetHeroes(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
-            GetHeroById(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
             InsertHeroWithSeriesAndComics(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
             UpdateHero(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
             DeleteHero(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
@@ -29,7 +27,7 @@ class RecyclerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = RecyclerActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        heroAdapter = HeroAdapter(viewModel,::showData)
+        heroAdapter = HeroAdapter(::getHeroe,::deleteHero,::showData)
         binding.rvHeroes.adapter = heroAdapter
 
         viewModel.heroes.observe(this,{heroes ->
@@ -46,6 +44,14 @@ class RecyclerActivity : AppCompatActivity() {
         bundle.putSerializable(resources.getString(R.string.heroe), hero)
         intent.putExtras(bundle)
         startActivity(intent)
+        finish()
+    }
+    fun deleteHero(hero:Hero){
+        viewModel.deleteHero(hero)
+    }
+
+    fun getHeroe(){
+        viewModel.getHeroes()
     }
 
 

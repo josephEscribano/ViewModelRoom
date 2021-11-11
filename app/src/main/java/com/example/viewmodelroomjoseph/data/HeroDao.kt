@@ -2,6 +2,7 @@ package com.example.viewmodelroomjoseph.data
 
 import androidx.room.*
 import com.example.viewmodelroomjoseph.data.modelo.*
+import com.example.viewmodelroomjoseph.domain.Comic
 
 @Dao
 interface HeroDao {
@@ -17,6 +18,12 @@ interface HeroDao {
 
     @Query("select * from series")
     suspend fun getSeries(): List<SerieEntity>
+
+    @Query("delete from comics where heroComicId = :id")
+    suspend fun deleteComics(id: Int)
+
+    @Query("delete from series where heroSerieId = :id")
+    suspend fun deleteSeries(id: Int)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertHero(hero: HeroEntity) :Long
@@ -43,6 +50,15 @@ interface HeroDao {
 
     @Delete
     fun deleteHero(heroe: HeroEntity)
+
+
+
+    @Transaction
+    suspend fun deleteHeroComicsAndSeries(heroWithSeriesAndComics: HeroWithSeriesAndComics){
+        deleteComics(heroWithSeriesAndComics.heroWithComics.hero.heroId)
+        deleteSeries(heroWithSeriesAndComics.heroWithComics.hero.heroId)
+        deleteHero(heroWithSeriesAndComics.heroWithComics.hero)
+    }
 
 
 

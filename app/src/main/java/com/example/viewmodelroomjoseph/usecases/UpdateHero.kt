@@ -4,6 +4,6 @@ import com.example.viewmodelroomjoseph.data.HeroRepository
 import com.example.viewmodelroomjoseph.data.modelo.toHeroEntity
 import com.example.viewmodelroomjoseph.domain.Hero
 
-data class UpdateHero(val heroRepository: HeroRepository) {
-    suspend fun invoke(hero: Hero) = heroRepository.updateHero(hero.toHeroEntity())
+data class UpdateHero(private val heroRepository: HeroRepository) {
+    fun invoke(hero: Hero) = heroRepository.updateHero(hero.toHeroEntity())
 }
