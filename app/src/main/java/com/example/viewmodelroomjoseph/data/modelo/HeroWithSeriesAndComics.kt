@@ -1,7 +1,6 @@
 package com.example.viewmodelroomjoseph.data.modelo
 
 import androidx.room.Embedded
-import androidx.room.Entity
 import androidx.room.Relation
 
 data class HeroWithSeriesAndComics(

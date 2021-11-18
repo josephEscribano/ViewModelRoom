@@ -1,49 +1,47 @@
 package com.example.viewmodelroomjoseph.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.viewmodelroomjoseph.R
-import com.example.viewmodelroomjoseph.data.HeroRepository
-import com.example.viewmodelroomjoseph.data.HeroRoomDatabase
 import com.example.viewmodelroomjoseph.databinding.ViewDataBinding
 import com.example.viewmodelroomjoseph.domain.Hero
-import com.example.viewmodelroomjoseph.usecases.*
+import com.example.viewmodelroomjoseph.ui.main.adapter.ComicAndSeriesAdapter
+import com.example.viewmodelroomjoseph.ui.main.viewmodel.DataViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class DataScreen: AppCompatActivity() {
+@AndroidEntryPoint
+class DataScreen : AppCompatActivity() {
     private lateinit var binding: ViewDataBinding
-    private lateinit var comicAdapter: ComicAdapter
     private lateinit var formatter: DateTimeFormatter
+    private lateinit var adapter: ComicAndSeriesAdapter
+    private lateinit var adapterSeries: ComicAndSeriesAdapter
+    private lateinit var hero: Hero
+    private val viewModel: DataViewModel by viewModels()
 
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(
-            GetHeroes(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
-            InsertHeroWithSeriesAndComics(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
-            UpdateHero(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
-            DeleteHero(HeroRepository(HeroRoomDatabase.getDatabase(this).heroDao())),
-        )
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ViewDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        adapter = ComicAndSeriesAdapter()
+        adapterSeries = ComicAndSeriesAdapter()
         formatter = DateTimeFormatter.ofPattern(resources.getString(R.string.formato))
-        val hero: Hero = intent.getSerializableExtra(resources.getString(R.string.heroe)) as Hero
-        with(binding){
+        hero = intent.getSerializableExtra(resources.getString(R.string.heroe)) as Hero
+        with(binding) {
             etName.setText(hero.name)
             etDescription.setText(hero.description)
             tvDate.text = formatter.format(hero.date).toString()
-
             hero.comics?.let {
-                rvComics.adapter = ComicAdapter(it.map { it.name })
+                rvComics.adapter = adapter
+                adapter.submitList(it.map { it.name })
             }
 
             hero.series?.let {
-                rvSeries.adapter = ComicAdapter(it.map { it.name })
+                rvSeries.adapter = adapterSeries
+                adapterSeries.submitList(it.map { it.name })
             }
 
             dateButton.setOnClickListener {
@@ -51,32 +49,40 @@ class DataScreen: AppCompatActivity() {
             }
 
             updateButton.setOnClickListener {
-                if (etName.text?.isNotEmpty() != false && etDescription.text?.isNotEmpty( ) != false
-                    && !tvDate.text.equals(resources.getString(R.string.dateField))){
-                    with(binding){
-                        hero.name = etName.text.toString()
-                        hero.description = etDescription.text.toString()
-                        hero.date = LocalDate.parse(tvDate.text,formatter)
-                    }
-                    viewModel.updateHero(hero)
-                    viewModel.getHeroes()
-                    Snackbar.make(binding.root,resources.getString(R.string.actualizado), Snackbar.LENGTH_SHORT).show()
-                }else{
-                    Snackbar.make(binding.root,resources.getString(R.string.aviso), Snackbar.LENGTH_SHORT).show()
-                }
+                updateHero()
 
-            }
 
-            listButton.setOnClickListener {
-                val intent = Intent(binding.root.context,RecyclerActivity::class.java)
-                startActivity(intent)
             }
 
         }
 
 
+    }
 
-
+    private fun updateHero() {
+        with(binding) {
+            if (etName.text?.isNotEmpty() != false && etDescription.text?.isNotEmpty() != false
+                && !tvDate.text.equals(resources.getString(R.string.dateField))
+            ) {
+                with(binding) {
+                    hero.name = etName.text.toString()
+                    hero.description = etDescription.text.toString()
+                    hero.date = LocalDate.parse(tvDate.text, formatter)
+                }
+                viewModel.updateHero(hero)
+                Snackbar.make(
+                    binding.root,
+                    resources.getString(R.string.actualizado),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    resources.getString(R.string.aviso),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
 
@@ -85,7 +91,10 @@ class DataScreen: AppCompatActivity() {
             val dayFormat = day.twoDigits()
             val monthFormat = (month + 1).twoDigits()
 
-            val selectDate =  dayFormat + resources.getString(R.string.barra)+ monthFormat + resources.getString(R.string.barra) + year
+            val selectDate =
+                dayFormat + resources.getString(R.string.barra) + monthFormat + resources.getString(
+                    R.string.barra
+                ) + year
             binding.tvDate.text = selectDate
 
         }
@@ -95,5 +104,6 @@ class DataScreen: AppCompatActivity() {
 
     }
 
-    fun Int.twoDigits() = if (this <= 9) "0$this" else this.toString()
+    fun Int.twoDigits() =
+        if (this <= 9) "${resources.getString(R.string.cero)}$this" else this.toString()
 }

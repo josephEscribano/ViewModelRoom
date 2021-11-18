@@ -24,4 +24,10 @@
     <string name="dateField">Date</string>
     <string name="formato">dd/MM/yyyy</string>
     <string name="actualizado">Heroe actualizado</string>
+    <string name="cero">0</string>
+    <string name="db">hero_database</string>
+    <string name="confirmacion">Confirmación</string>
+    <string name="pregunta">¿Quieres borrar el heroe?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 </resources>
