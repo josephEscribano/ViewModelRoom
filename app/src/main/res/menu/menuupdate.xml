@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.DataScreen"
+    >
+    <item
+        android:id="@+id/btUpdate"
+        android:icon="@drawable/ic_baseline_system_update_alt_24"
+        android:title="@string/Update"
+        app:showAsAction="always"
+        />
+
+</menu>

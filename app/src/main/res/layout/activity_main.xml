@@ -100,37 +100,8 @@
         app:layout_constraintVertical_bias="0.13"
         />
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:backgroundTint="@color/purple_700"
-        android:text="@string/add"
-        android:textColor="@color/white"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:layout_constraintVertical_bias="0.9" />
 
-    <Button
-        android:id="@+id/listButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:backgroundTint="@color/purple_700"
-        android:text="@string/list"
-        android:textColor="@color/white"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:layout_constraintVertical_bias="0.9" />
+
 
     <Button
         android:id="@+id/addComicsButton"

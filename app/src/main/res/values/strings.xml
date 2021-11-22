@@ -30,4 +30,6 @@
     <string name="pregunta">¿Quieres borrar el heroe?</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="guardar">Guardar</string>
+    <string name="heroes">Heroes</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.example.viewmodelroomjoseph.ui.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.viewmodelroomjoseph.R
@@ -21,6 +23,23 @@ class DataScreen : AppCompatActivity() {
     private lateinit var adapterSeries: ComicAndSeriesAdapter
     private lateinit var hero: Hero
     private val viewModel: DataViewModel by viewModels()
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menuupdate, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.btUpdate -> {
+                updateHero()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +65,6 @@ class DataScreen : AppCompatActivity() {
 
             dateButton.setOnClickListener {
                 showDatePickerDialog()
-            }
-
-            updateButton.setOnClickListener {
-                updateHero()
-
-
             }
 
         }

@@ -2,6 +2,8 @@ package com.example.viewmodelroomjoseph.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.viewmodelroomjoseph.R
@@ -29,12 +31,36 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.btGuardar -> {
+                addHero()
+                true
+            }
+            R.id.btHeroes -> {
+                val intent = Intent(binding.root.context, RecyclerActivity::class.java)
+                startActivity(intent)
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         comics = arrayListOf()
         series = arrayListOf()
+
+
         with(binding) {
             dateButton.setOnClickListener {
                 showDatePickerDialog()
@@ -49,19 +75,11 @@ class MainActivity : AppCompatActivity() {
                 addSeries()
             }
 
-            addButton.setOnClickListener {
-                addHero()
-
-            }
-
-            listButton.setOnClickListener {
-                val intent = Intent(binding.root.context, RecyclerActivity::class.java)
-                startActivity(intent)
-            }
         }
 
 
     }
+
 
     private fun addHero() {
         with(binding) {

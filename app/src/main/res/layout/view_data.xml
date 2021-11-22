@@ -102,22 +102,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tfDescription"
         app:layout_constraintVertical_bias="0.085" />
 
-    <Button
-        android:id="@+id/updateButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:backgroundTint="@color/purple_700"
-        android:text="@string/Update"
-        android:textColor="@color/white"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:layout_constraintVertical_bias="0.961" />
-
     <TextView
         android:id="@+id/comicsLabel"
         android:layout_width="wrap_content"
@@ -174,7 +158,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.44">
+        app:layout_constraintVertical_bias="0.7">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSeries"
